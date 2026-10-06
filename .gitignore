@@ -1,0 +1,14 @@
+# Daten (NASA C-MAPSS) nicht ins Repo
+data/
+
+# macOS
+.DS_Store
+
+# Jupyter / Python
+.ipynb_checkpoints/
+__pycache__/
+*.pyc
+
+# Umgebung
+.env
+.venv/
