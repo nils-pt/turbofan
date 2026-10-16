@@ -12,4 +12,4 @@ def nasa_score(y_true, y_pred, aggregation = "sum"):
     if aggregation == "mean":
         return strafe.mean()
     
-    raise ValueError(f"Aggregation muss 'sum' oder 'mean' sein, nicht '{aggregation}")
+    raise ValueError(f"Aggregation muss 'sum' oder 'mean' sein, nicht '{aggregation}'")
