@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 from sklearn.metrics import root_mean_squared_error
 from sklearn.base import clone
 from src.metrics import nasa_score
@@ -43,3 +44,20 @@ def run_cv(model, X, y, splits):
     return cv
 
 
+def oof_vorhersagen(model, X, y, splits):
+    
+    oof = np.full(len(y), np.nan)
+    
+    for train_idx, val_idx in splits:
+        X_tr, X_val = X.iloc[train_idx], X.iloc[val_idx]
+        y_tr = y.iloc[train_idx]
+        
+        m = clone(model)
+        m.fit(X_tr, y_tr)
+        vorhersage = m.predict(X_val)
+        oof[val_idx] = vorhersage
+    
+    if np.isnan(oof).sum() > 0:
+        raise ValueError("OOF unvollständig: Es sind noch NaN Werte übrig!")
+    
+    return oof
