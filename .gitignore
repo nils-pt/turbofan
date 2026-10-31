@@ -12,3 +12,4 @@ __pycache__/
 # Umgebung
 .env
 .venv/
+.vscode/
