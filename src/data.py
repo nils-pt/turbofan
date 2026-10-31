@@ -23,6 +23,7 @@ def add_rul(df, cap=125):
     """Nur für Train-Set gedacht."""
 
     df = df.copy()
+
     df["RUL"] = df.groupby("unit")["cycle"].transform("max") - df["cycle"]
     if cap is not None:
         df["RUL"] = df["RUL"].clip(upper=cap)
