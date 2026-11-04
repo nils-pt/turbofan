@@ -31,4 +31,4 @@ def test_eingabe_unveraendert():
 
     df2 = add_rul(df)
 
-    assert "RUL" not in df.columns, "df wurde um RUL-Spalte ergänzt"   
+    assert "RUL" not in df.columns, "df wurde um RUL-Spalte ergänzt"
