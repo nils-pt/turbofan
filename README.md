@@ -206,16 +206,12 @@ reports/          figures and result tables
 
 - Labels. In this project, every training engine runs to failure, so the true RUL is known for every cycle. → In a real fleet, 
   engines are maintained before they fail. Most histories end without a failure, so the true RUL is unknown (right-censored data). The features themselves would still work on a live data stream, because they only use past cycles.
-
 - Costs. Here, the NASA score penalises late errors more than early ones, with fixed constants (10 for late, 13 for early). → In 
   practice, these weights would be replaced by the actual costs of a failure and of early maintenance. This could change the model choice: LightGBM won only narrowly on the NASA score (3.60 vs. 3.63), while the random forest had fewer late predictions (39 % vs. 46 %).
-
 - Onset of degradation. Here, the RUL is capped at 125 for every engine. → In practice, degradation starts at a different, unknown    
   point for each machine. The SHAP knee for s11_slope25 already shows that the cap labels early degradation as "healthy". The cap is a modelling assumption that has to be tested (roadmap: 115 / 125 / 135).
-
 - Sensor quality. Here, all 14 sensors deliver a value in every cycle. → Real sensors fail, freeze or drift. A gap or a stuck value 
   corrupts 25 cycles of slope features. A slowly drifting sensor produces exactly the slope signal the model relies on most (slope25 carries 40 % of the SHAP importance), so drift would look like wear.
-
 - Operating conditions. FD001 has a single operating condition. → Real machines change load and environment, which shifts sensor  
   levels without any wear (FD002–FD004 cover this, see roadmap).
 
