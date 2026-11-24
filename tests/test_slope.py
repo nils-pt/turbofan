@@ -13,6 +13,9 @@ def mini_df():
     return df
 
 def test_slope_linear_values():
+    """Testet Funktion add_slope auf richtige Berechnung der erwarteten Steigung einer Testfunktion, überprüft zudem
+    ob zwischen den einzlnen Triebwerken unterschieden wird(falls nicht würde bei unit = 2 keine Platzhalter 0 in cycle 1-4 kommen)"""
+
     df = mini_df()
     df_neu, neue_spalten = add_slope(df, ["s2"], fenster=5)
     spalte = neue_spalten[0]
@@ -21,16 +24,19 @@ def test_slope_linear_values():
         maske_voll = (df_neu["unit"] == unit) & (df_neu["cycle"] >= 5)
         maske_leer = (df_neu["unit"] == unit) & (df_neu["cycle"] < 5)
 
-        assert maske_voll.sum() == 4, "full-window mask does not hit exactly 4 rows"
-        assert maske_leer.sum() == 4, "placeholder mask does not hit exactly 4 rows"
+        assert maske_voll.sum() == 4, "Volle Maske hat nicht genau 4 Zeilen"
+        assert maske_leer.sum() == 4, "Platzhalter Maske hat nicht genau 4 Zeilen"
 
         werte_voll = df_neu.loc[maske_voll, spalte]
         werte_leer = df_neu.loc[maske_leer, spalte]
 
-        assert np.allclose(werte_voll, erwartet), f"unit {unit}: slope is not {erwartet}"
-        assert (werte_leer == 0).all(), f"unit {unit}: placeholder is not 0"
+        assert np.allclose(werte_voll, erwartet), f"unit {unit}: Steigung ist nicht {erwartet}"
+        assert (werte_leer == 0).all(), f"unit {unit}: Platzhalter ist nicht 0"
 
 def test_slope_no_future_data():
+    """Testet ob zukünftige Daten in die Berechnung einfließen indem der gleiche Dataframe an Stelle cycle = 7 auf Triebwerk 1 
+    verändert wird. Steigung von cycle 5-6 ändert sich nicht, ab cylce = 7 schon"""
+
     k = 7
     fenster = 5
     df_orig = mini_df()
