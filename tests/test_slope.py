@@ -9,12 +9,11 @@ def mini_df():
         "s2": [3,5,7,9,11,13,15,17,97,94,91,88,85,82,79,76],
         "cycle": [1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8]
     })
-    df = df.copy()
     return df
 
 def test_slope_linear_values():
     """Testet Funktion add_slope auf richtige Berechnung der erwarteten Steigung einer Testfunktion, überprüft zudem
-    ob zwischen den einzlnen Triebwerken unterschieden wird(falls nicht würde bei unit = 2 keine Platzhalter 0 in cycle 1-4 kommen)"""
+    ob zwischen den einzelnen Triebwerken unterschieden wird(falls nicht würde bei unit = 2 keine Platzhalter 0 in cycle 1-4 kommen)"""
 
     df = mini_df()
     df_neu, neue_spalten = add_slope(df, ["s2"], fenster=5)
@@ -35,7 +34,7 @@ def test_slope_linear_values():
 
 def test_slope_no_future_data():
     """Testet ob zukünftige Daten in die Berechnung einfließen indem der gleiche Dataframe an Stelle cycle = 7 auf Triebwerk 1 
-    verändert wird. Steigung von cycle 5-6 ändert sich nicht, ab cylce = 7 schon"""
+    verändert wird. Steigung von cycle 5-6 ändert sich nicht, in cycle = 7 schon"""
 
     k = 7
     fenster = 5
